@@ -1,6 +1,12 @@
 Actions nécessaires pour compiler le projet :
 
 	npm install
+
+
+Vous pouvez ensuite facilement vous faire une idée des fonctionnalités proposées en tapant, dans le dossier de travail :
+
+	node server.js
+
 	
 	
 	
