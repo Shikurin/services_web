@@ -1,3 +1,5 @@
+// Entrez en ligne de commande "node hello.js" en vous plaçant dans le répertoire courant et observez le résultat !
+
 var RiveScript = require("rivescript");
 
 var helloBot = new RiveScript();
