@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Create a new ChatBot</h1>
+    	<form action="" method="POST">
+    		<label>Name : </label>
+    		<input type="text" name="name"/> <br>
+    		<input type="submit"/>
+    	</form>
+    </div>
+    <div>
+    	<ul>
+    	<% list.forEach(function(bot) { %>
+        <li>
+            <%= bot.id %>
+            <strong><%= bot.name %></strong>
+             <form action="/delete" method="POST">
+                <input type="hidden" name="id" value="<%= bot.id %>"/>
+                <input type="submit" value="delete"/>
+            </form>
+        </li>
+    <% }); %>
+        </ul>
+    </div>
+
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

@@ -28,3 +28,7 @@ Notes à moi-même :
  - Installer express :
  
  	npm install express
+ 
+ - Installer body-parser :
+ 
+ 	npm install body-parser

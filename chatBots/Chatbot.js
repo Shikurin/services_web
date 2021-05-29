@@ -7,9 +7,9 @@ class Chatbot {
       this.id = parseInt(    Math.floor(Math.random() * Math.floor(100000))     );
     }
     if(undefined != data.name) {
-      this.title = data.title;
+      this.name = data.name;
     } else {
-      this.title = "";
+      this.name = "";
     }
     if(undefined != data.personality) {
       this.personality = data.personality;
