@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var RiveScript = require("rivescript");
 
 const ChatbotService = require("./chatBots/ChatbotService_ArrayImpl.js");
 
@@ -8,15 +9,44 @@ let chatBotServiceInstance;
 const app = express();
 const port = 3001;
 
+var chatBot = new RiveScript();
+
+
+
+
+
+chatBot.loadFile("test/hello.rive").then(loading_done).catch(loading_error);
+
+function loading_done() {
+   console.log("Bot has finished loading!");
+  
+   chatBot.sortReplies();
+  
+   let username = "local-user";
+  /*
+   helloBot.reply(username, "Hello, bot!").then(function(reply) {
+      console.log("The bot says: " + reply);
+   });*/
+}
+
+function loading_error(error, filename, lineno) {
+   console.log("Error when loading files: " + error);
+}
+
+var sentence;
+
+
+
 
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+
 
 app.get('/', (req, res, next) => {
    //nothing to do
@@ -28,12 +58,12 @@ app.get('/', (req, res, next) => {
 app.get('/', function(req, res) {
     res.render('pages/index');
 });
-
-// about page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
 */
+
+// talk page
+app.get('/talk', function(req, res) {
+    res.render('pages/talk', {answer:sentence});
+});
 
 
 app.post('/', (req, res, next) => {
@@ -53,6 +83,23 @@ app.post('/delete', (req, res, next) => {
       console.log("An error occured : " + e);
    }
    res.redirect("/");
+   next();
+});
+
+app.post('/talking', (req, res, next) => {
+   try {
+      console.log("Est-ce que tu me voies ?");
+      console.log(req.body.sentence);
+      let username = "local-user";
+      chatBot.reply(username, req.body.sentence).then(function(reply) {
+         console.log("The bot says: " + reply);
+         sentence = reply;
+         console.log(sentence);
+      });
+   } catch(e) {
+      console.log("An error occured : " + e);
+   }
+   res.redirect("/talk");
 });
 
 
