@@ -9,13 +9,12 @@ let chatBotServiceInstance;
 const app = express();
 const port = 3001;
 
-
-
-
-var bot;
 var chatBot = new RiveScript();
+var selectedBot;
 
-chatBot.loadFile("test/hello.rive").then(loading_done).catch(loading_error);
+var sentence;
+var answer;
+
 
 function loading_done() {
    console.log("Bot has finished loading!");
@@ -28,15 +27,6 @@ function loading_done() {
 function loading_error(error, filename, lineno) {
    console.log("Error when loading files: " + error);
 }
-
-
-
-
-
-var sentence;
-var answer;
-
-
 
 
 // parse application/json
@@ -63,7 +53,7 @@ app.get('/', function(req, res) {
 
 // talk page
 app.get('/talk', function(req, res) {
-    res.render('pages/talk', {answer:answer, sentence:sentence, list:chatBotServiceInstance.getChatbots()});
+    res.render('pages/talk', {answer:answer, sentence:sentence, list:chatBotServiceInstance.getChatbots(), chatBot:selectedBot});
 });
 
 
@@ -79,8 +69,9 @@ app.post('/', (req, res, next) => {
 
 app.post('/select', (req, res, next) => {
    try {
-      bot = chatBotServiceInstance.selectChatbot(parseInt(req.body.idSelect));
-      console.log(bot);
+      selectedBot = chatBotServiceInstance.selectChatbot(parseInt(req.body.idSelect));
+      console.log(selectedBot);
+      chatBot.loadFile(selectedBot.personality).then(loading_done).catch(loading_error);
    } catch(e) {
       console.log("An error occured : " + e);
    }
