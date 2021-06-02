@@ -26,12 +26,16 @@
         <li>
             <%= bot.id %>
             <strong><%= bot.name %></strong>
+            <form action="/select" method="POST">
+                <input type="hidden" name="idSelect" value="<%= bot.id %>"/>
+                <input type="submit" value="select"/>
+            </form>
              <form action="/delete" method="POST">
                 <input type="hidden" name="id" value="<%= bot.id %>"/>
                 <input type="submit" value="delete"/>
             </form>
         </li>
-    <% }); %>
+        <% }); %>
         </ul>
     </div>
 

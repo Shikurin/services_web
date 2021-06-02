@@ -14,22 +14,31 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="jumbotron">
-                <h1>This is great</h1>
-                <p>Welcome to templating using EJS</p>
+                <h1>Parlons un peu !</h1>
+                <% if (sentence) { %>
+                <p id="previouslyAsked">>> <%= sentence %></p>
+                <% } %>
+    	        <% if (answer) { %>
+                <p id="reply"><%= answer %></p>
+                <% } %>
                 <form action="/talking" method="POST">
     	            <label>Wanna chat a little ? </label>
     	            <input type="text" name="sentence"/> <br>
     	            <input type="submit"/>
     	        </form>
-    	        <% if (answer) { %>
-                <p id="reply"><%= answer %></p>
-                <% } %>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="well">
                 <h3>Vous parlez avec : </h3>
+                <ul>
+    	        <% list.forEach(function(bot) { %>
+                <li>
+                   <%= bot.id %>
+                   <strong><%= bot.name %></strong>
+               </li>
+               <% }); %>
             </div>
         </div>
     </div>

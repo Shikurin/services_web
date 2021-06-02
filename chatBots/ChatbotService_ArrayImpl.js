@@ -1,6 +1,6 @@
 const Chatbot = require("./Chatbot.js");
 
-class ChatbotService{
+class ChatbotService {
 
 	constructor(data){  
 		this.idCpt = 0;
@@ -12,7 +12,7 @@ class ChatbotService{
 		return service ;
 	}
 
-	addChatbot(name){
+	addChatbot(name) {
 		const id = this.idCpt;
 		let newBot;
 		if (undefined !== (newBot = new Chatbot({id:id, name:name}))) {
@@ -25,20 +25,39 @@ class ChatbotService{
 	}
 	
 	removeChatbot(id) {
-		
 		var pos ;
-		let taskFound = false ;
+		let botFound = false ;
 		let i = 0 ;
-		while (!taskFound) {
+		while (!botFound) {
 			if (this.array[i].id === id) {
 				pos = i ;
-				taskFound = true ;
+				botFound = true ;
 			}
 			i++ ;
 		}
 		
-		let removedTask = this.array.splice(pos, i) ;
+		let removedBot = this.array.splice(pos, i) ;
 		
+		console.log("Just erased a bot") ;
+	}
+	
+	selectChatbot(id) {
+		var pos ;
+		let selectedBot ;
+		let botFound = false ;
+		let i = 0 ;
+		while (!botFound) {
+			if (this.array[i].id === id) {
+				pos = i ;
+				selectedBot = this.array[i] ;
+				botFound = true ;
+			}
+			i++ ;
+		}
+		
+		console.log("Just selected a bot : " + selectedBot.name);
+		
+		return selectedBot ;
 	}
 
 	getChatbots(){

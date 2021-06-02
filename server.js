@@ -9,11 +9,11 @@ let chatBotServiceInstance;
 const app = express();
 const port = 3001;
 
+
+
+
+var bot;
 var chatBot = new RiveScript();
-
-
-
-
 
 chatBot.loadFile("test/hello.rive").then(loading_done).catch(loading_error);
 
@@ -23,17 +23,18 @@ function loading_done() {
    chatBot.sortReplies();
   
    let username = "local-user";
-  /*
-   helloBot.reply(username, "Hello, bot!").then(function(reply) {
-      console.log("The bot says: " + reply);
-   });*/
 }
 
 function loading_error(error, filename, lineno) {
    console.log("Error when loading files: " + error);
 }
 
+
+
+
+
 var sentence;
+var answer;
 
 
 
@@ -62,7 +63,7 @@ app.get('/', function(req, res) {
 
 // talk page
 app.get('/talk', function(req, res) {
-    res.render('pages/talk', {answer:sentence});
+    res.render('pages/talk', {answer:answer, sentence:sentence, list:chatBotServiceInstance.getChatbots()});
 });
 
 
@@ -76,6 +77,16 @@ app.post('/', (req, res, next) => {
    next();
 });
 
+app.post('/select', (req, res, next) => {
+   try {
+      bot = chatBotServiceInstance.selectChatbot(parseInt(req.body.idSelect));
+      console.log(bot);
+   } catch(e) {
+      console.log("An error occured : " + e);
+   }
+   res.redirect("/");
+});
+
 app.post('/delete', (req, res, next) => {
    try {
       chatBotServiceInstance.removeChatbot(parseInt(req.body.id));
@@ -83,18 +94,18 @@ app.post('/delete', (req, res, next) => {
       console.log("An error occured : " + e);
    }
    res.redirect("/");
-   next();
 });
 
 app.post('/talking', (req, res, next) => {
    try {
       console.log("Est-ce que tu me voies ?");
       console.log(req.body.sentence);
+      sentence = req.body.sentence;
       let username = "local-user";
       chatBot.reply(username, req.body.sentence).then(function(reply) {
          console.log("The bot says: " + reply);
-         sentence = reply;
-         console.log(sentence);
+         answer = reply;
+         console.log(answer);
       });
    } catch(e) {
       console.log("An error occured : " + e);

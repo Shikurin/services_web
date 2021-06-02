@@ -1,28 +1,28 @@
 class Chatbot {
 
-  constructor(data){  // id, name, personality, state
+  constructor(data) {  // id, name, personality
+  
     if (undefined != data.id) {
       this.id = data.id;
     } else {
       this.id = parseInt(    Math.floor(Math.random() * Math.floor(100000))     );
     }
+    
     if(undefined != data.name) {
       this.name = data.name;
     } else {
-      this.name = "";
+      this.name = "HelloBot";
     }
+    
     if(undefined != data.personality) {
       this.personality = data.personality;
     } else {
-      this.personality = "";
+      this.personality = "brains/hello.rive";
     }
-    if(undefined != data.state) {
-      this.state = data.state;
-    } else {
-      this.state = [];
-    }
+    
   }
   
 }
+
 
 module.exports = Chatbot;
