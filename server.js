@@ -7,6 +7,7 @@ const ChatbotService = require("./chatBots/ChatbotService_ArrayImpl.js");
 let chatBotServiceInstance;
 
 const app = express();
+const appChat = require('./chatServer.js');
 const port = 8080;
 
 var chatBot = new RiveScript();
@@ -78,6 +79,19 @@ app.post('/select', (req, res, next) => {
    res.redirect("/");
 });
 
+app.post('/activate', (req, res, next) => {
+   try {
+      activatedBot = chatBotServiceInstance.selectChatbot(parseInt(req.body.idActivate));
+      console.log("Un bot vient juste d'être activé : " + activatedBot.name);
+      let activatedPort = activatedBot.id + 3000;
+      appChat.listen(activatedPort);
+      console.log(activatedPort + " is another magic port!");
+   } catch(e) {
+      console.log("An error occured : " + e);
+   }
+   res.redirect("/");
+});
+
 app.post('/delete', (req, res, next) => {
    try {
       chatBotServiceInstance.removeChatbot(parseInt(req.body.id));
@@ -89,7 +103,6 @@ app.post('/delete', (req, res, next) => {
 
 app.post('/talking', (req, res, next) => {
    try {
-      console.log("Est-ce que tu me voies ?");
       console.log(req.body.sentence);
       sentence = req.body.sentence;
       let username = "local-user";
