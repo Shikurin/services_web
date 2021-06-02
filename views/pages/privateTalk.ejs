@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    	<% if (chatBot) { %>
+	<title><%= chatBot.name %></title>
+	<% } else { %>
+	<title>Je ne trouve pas le bot...</title>
+	<% } %>
+
+	<!-- CSS (load bootstrap from a CDN) -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+	    body { padding-top:50px; }
+	</style>
+</head>
+<body class="container">
+
+<main>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="jumbotron">
+                <h1>Parlons un peu !</h1>
+                <% if (sentence) { %>
+                <p id="previouslyAsked">>> <%= sentence %></p>
+                <% } %>
+    	        <% if (answer) { %>
+                <p id="reply"><%= answer %></p>
+                <% } %>
+                <form action="/talking" method="POST">
+    	            <label>Wanna chat a little ? </label>
+    	            <input type="text" name="sentence"/> <br>
+    	            <input type="submit"/>
+    	        </form>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="well">
+                <% if (chatBot) { %>
+                <h3>Vous parlez avec : </h3>
+                <%= chatBot.id %>
+                <strong><%= chatBot.name %></strong>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

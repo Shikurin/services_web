@@ -7,7 +7,7 @@ const ChatbotService = require("./chatBots/ChatbotService_ArrayImpl.js");
 let chatBotServiceInstance;
 
 const app = express();
-const port = 3001;
+const port = 8080;
 
 var chatBot = new RiveScript();
 var selectedBot;
@@ -113,6 +113,6 @@ app.use((req, res, next) => {
 
 ChatbotService.create().then(ts => {
    chatBotServiceInstance = ts;
-   app.listen(8080);
-   console.log('8080 is the magic port');
+   app.listen(port);
+   console.log(port + ' is the magic port');
 });
