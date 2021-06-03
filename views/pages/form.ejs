@@ -11,13 +11,40 @@
 
 <main>
 
-    <div class="jumbotron">
-        <h1>Create a new ChatBot</h1>
-    	<form action="" method="POST">
-    	    <label>Name : </label>
-    	    <input type="text" name="name"/> <br>
-    	    <input type="submit"/>
-    	</form>
+	<div class="row">
+
+	    <div class="col-sm-8">
+		    <div class="jumbotron">
+			<h1>Create a new ChatBot</h1>
+			<form action="" method="POST">
+		    	    <label>Name : </label>
+		    	    <input type="text" name="name"/> <br>
+		    	    <input type="submit"/>
+		    	</form>
+		    </div>
+	    </div>
+
+	    <div class="col-sm-4">
+		    <div class="well">
+		        <% if (chatBot) { %>
+		        <h3>Vous parlez avec : </h3>
+		        <%= chatBot.id %>
+		        <strong><%= chatBot.name %></strong>
+		        <p>Peut-être voulez-vous qu'il parle différemment ? </p>
+		        <% } else { %>
+		        <p>Pour vous rappeler, voici une liste des personnalités disponibles :</p>
+		        <% } %>
+		        <ul>
+	    	        <% listPersonalities.forEach(function(mind) { %>
+		        <li>
+		            <form action="/selectPersonality" method="POST">
+                	   	<input type="submit" name="selectPersonality" value="<%= mind %>"/>
+            		    </form>
+		       </li>
+		       <% }); %>
+		    </div>
+	    </div>
+    
     </div>
     
     <div>
@@ -26,6 +53,7 @@
         <li>
             <%= bot.id %>
             <strong><%= bot.name %></strong>
+            <%= bot.personality %>
             <form action="/select" method="POST">
                 <input type="hidden" name="idSelect" value="<%= bot.id %>"/>
                 <input type="submit" value="select"/>

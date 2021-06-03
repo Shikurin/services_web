@@ -13,6 +13,10 @@ const port = 8080;
 var chatBot = new RiveScript();
 var selectedBot;
 
+var listPersonalities = new Array();
+listPersonalities.push("brains/hello.rive");
+listPersonalities.push("brains/standard.rive");
+
 var sentence;
 var answer;
 
@@ -45,12 +49,10 @@ app.get('/', (req, res, next) => {
    next();
 });
 
-/*
-// index page
-app.get('/', function(req, res) {
-    res.render('pages/index');
+// personalities page
+app.get('/personalities', function(req, res) {
+    res.render('pages/personalities', {listPersonalities:listPersonalities});
 });
-*/
 
 // talk page
 app.get('/talk', function(req, res) {
@@ -66,6 +68,19 @@ app.post('/', (req, res, next) => {
       console.log("An error occured : " + e);
    }
    next();
+});
+
+app.post('/selectPersonality', (req, res, next) => {
+   try {
+      personality = String(req.body.selectPersonality);
+      console.log("Nous avons trouvé une personnalité ! " + personality);
+      if (selectedBot) {
+         selectedBot.personality = personality;
+      }
+   } catch(e) {
+      console.log("An error occured : " + e);
+   }
+   res.redirect("/");
 });
 
 app.post('/select', (req, res, next) => {
@@ -117,9 +132,24 @@ app.post('/talking', (req, res, next) => {
    res.redirect("/talk");
 });
 
+app.post('/selectFile', (req, res, next) => {
+   try {
+      selectedFile = String(req.body.idSelectFile);
+      if (listPersonalities.indexOf("brains/" + selectedFile) === -1) {
+         console.log("J'ajoute une personnalité : " + "brains/"+selectedFile);
+         listPersonalities.push("brains/" + selectedFile);
+      } else {
+         console.log("Cette personnalité existe déjà !");
+      }
+   } catch(e) {
+      console.log("An error occured : " + e);
+   }
+   res.redirect("/personalities");
+});
+
 
 app.use((req, res, next) => {
-   res.render('pages/form', {list:chatBotServiceInstance.getChatbots()});
+   res.render('pages/form', {list:chatBotServiceInstance.getChatbots(), chatBot:selectedBot, listPersonalities:listPersonalities});
    next();
 });
 

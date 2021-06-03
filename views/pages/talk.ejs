@@ -12,6 +12,7 @@
 <main>
 
     <div class="row">
+    
         <div class="col-sm-8">
             <div class="jumbotron">
                 <h1>Parlons un peu !</h1>
@@ -35,7 +36,7 @@
                 <h3>Vous parlez avec : </h3>
                 <%= chatBot.id %>
                 <strong><%= chatBot.name %></strong>
-                <h3>Vous pourriez aussi discuter avec : </h3>
+                <p>Vous pourriez aussi discuter avec : </p>
                 <% } else { %>
                 <h3>Vous devriez sélectionner un ami avec lequel discuter : </h3>
                 <% } %>
@@ -48,6 +49,7 @@
                <% }); %>
             </div>
         </div>
+        
     </div>
     
 </main>

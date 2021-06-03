@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+
+    <div class="jumbotron">
+        <h3>Si vous ne trouvez pas une personnalité intéressante, pourquoi ne pas en ajouter une ?</h3>
+        <p>Veillez seulement à l'ajouter au dossier brains.</p>
+        <% } %>
+        <ul>
+        <form action="/selectFile" method="POST">
+            <input type="file" name="idSelectFile"/>
+            <input type="submit" value="selectFile"/>
+        </form>
+    </div>
+    
+    <div>
+    	<p>Voici les personnalités déjà présentes :</p>
+    	<ul>
+    	<% listPersonalities.forEach(function(mind) { %>
+        <li>
+            <%= mind %>
+        <% }); %>
+        </ul>
+    </div>
+    
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
