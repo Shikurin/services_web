@@ -11,6 +11,7 @@ const appChat = require('./chatServer.js');
 const port = 8080;
 
 var chatBot = new RiveScript();
+var privateChatBot = new RiveScript();
 var selectedBot;
 
 var listPersonalities = new Array();
@@ -76,6 +77,7 @@ app.post('/selectPersonality', (req, res, next) => {
       console.log("Nous avons trouvé une personnalité ! " + personality);
       if (selectedBot) {
          selectedBot.personality = personality;
+         chatBot.loadFile(selectedBot.personality).then(loading_done).catch(loading_error);
       }
    } catch(e) {
       console.log("An error occured : " + e);
@@ -98,8 +100,9 @@ app.post('/activate', (req, res, next) => {
    try {
       activatedBot = chatBotServiceInstance.selectChatbot(parseInt(req.body.idActivate));
       console.log("Un bot vient juste d'être activé : " + activatedBot.name);
+      activatedBot.state = true;
       let activatedPort = activatedBot.id + 3000;
-      appChat.listen(activatedPort);
+      activatedBot.server = appChat.listen(activatedPort);
       console.log(activatedPort + " is another magic port!");
    } catch(e) {
       console.log("An error occured : " + e);
@@ -109,7 +112,13 @@ app.post('/activate', (req, res, next) => {
 
 app.post('/delete', (req, res, next) => {
    try {
-      chatBotServiceInstance.removeChatbot(parseInt(req.body.id));
+      deletedBot = chatBotServiceInstance.selectChatbot(parseInt(req.body.id));
+      if (deletedBot.state) {
+         deletedBot.server.close();
+         deletedBot.state = true;
+         console.log("Le port " + deletedBot.server + " est désactivé !");
+      }
+      chatBotServiceInstance.removeChatbot(deletedBot.id);
    } catch(e) {
       console.log("An error occured : " + e);
    }

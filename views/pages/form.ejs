@@ -58,10 +58,12 @@
                 <input type="hidden" name="idSelect" value="<%= bot.id %>"/>
                 <input type="submit" value="select"/>
             </form>
+            <% if (bot.state === false) { %>
             <form action="/activate" method="POST">
                 <input type="hidden" name="idActivate" value="<%= bot.id %>"/>
                 <input type="submit" value="activate"/>
             </form>
+            <% } %>
             <form action="/delete" method="POST">
                 <input type="hidden" name="id" value="<%= bot.id %>"/>
                 <input type="submit" value="delete"/>
