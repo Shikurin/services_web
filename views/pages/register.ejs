@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+
+<style>
+body{
+	width: 750px;
+}
+h1{
+	color:white;
+	font-family: Caflisch Script, Adobe Poetica, Sanvito, Ex Ponto, Snell Roundhand, Zapf-Chancery, cursive;
+	font-weight:bold;
+	text-align: center;
+}
+h2{
+	color:purple;
+	font-family: Caflisch Script, Adobe Poetica, Sanvito, Ex Ponto, Snell Roundhand, Zapf-Chancery, cursive;
+	font-weight:bold;
+	text-align: center;
+}
+form{
+	/* Uniquement centrer le formulaire sur la page */
+  	margin: 0 auto;
+  	width: 400px;
+  	/* Encadré pour voir les limites du formulaire */
+  	padding: 1em;
+  	border: 1px solid #CCC;
+  	border-radius: 1em;
+	background-color:grey;
+}
+p{
+	width:400px;
+	padding-left: 305px;
+	text-align: left;
+	vertical-align: top;
+}
+label.left{
+	float: left;
+	margin-left: -305px;
+	font-weight:bold;
+}
+</style>
+
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+<form action="register" method="post">
+  <div>
+        <label for="mail">Mail :</label>
+        <input type="email" id="mail" name="user_mail">
+    </div>
+    <div>
+        <label for="mdp">Mot de Passe :</label>
+        <input type="text" id="mdp" name="user_mdp">
+    </div>
+    <div class="button">
+        <button type="submit">Inscription</button>
+    </div>
+
+
+</form>
+
+</div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
