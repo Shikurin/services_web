@@ -116,7 +116,7 @@ app.post('/delete', (req, res, next) => {
       if (deletedBot.state) {
          deletedBot.server.close();
          deletedBot.state = true;
-         console.log("Le port " + deletedBot.server + " est désactivé !");
+         console.log("Le port du bot est désactivé !");
       }
       chatBotServiceInstance.removeChatbot(deletedBot.id);
    } catch(e) {

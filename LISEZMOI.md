@@ -32,3 +32,7 @@ Notes à moi-même :
  - Installer body-parser :
  
  	npm install body-parser
+ 	
+ - Installer discord.js :
+ 
+ 	npm install discord.js
