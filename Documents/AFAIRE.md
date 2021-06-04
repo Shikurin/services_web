@@ -1,8 +1,8 @@
- - La possibilité de créer un nouveau chatbot ==> probablement une classe Chatbot ;
+ - La possibilité de créer un nouveau chatbot (x) ==> probablement une classe Chatbot ;
  
- - Une interface de communication avec un chatbot ;
+ - Une interface de communication avec un chatbot (x) ;
  
- - La possibilité de s'authentifier, et ainsi d'avoir accès à une interface d'administration ;
+ - La possibilité de s'authentifier (x) , et ainsi d'avoir accès à une interface d'administration ;
  
  - La possibilité d'ajouter des comportements prédéfinis à un bot depuis une interface ;
  

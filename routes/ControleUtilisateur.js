@@ -1,39 +1,45 @@
 
-var jwt = require('../utils/jwt.utils');
-var utilisateur = require('../données/utilisateur.json');
 
 //Routes
 module.exports = {
 	
-	
-	register: function(req, res) {	
-		var mail = req.body.user_mail
-		var mdp = req.body.user_mdp
-		if(mail == null || mdp == null){
+	register: async function(req, res) {	
+		var email = req.body.user_mail
+		var mdpasse = req.body.user_mdp
+		if(email == null || mdpasse == null){
 			return res.status(400).json({ 'error': 'missing parameters' });
 		}
-		const user = utilisateur.find(utilisateur => utilisateur.mail === mail)
-		if( typeof user == 'undefined'){
-			utilisateur.push(req.body)
-			return res.status(200).json(utilisateur)
+		const presence = await db.collection('utilisateur').findOne({mail: email})
+		if(presence === null){
+			const user = await db.collection('utilisateur').insertOne({ isAdmin: "0", mail: email, mdp: mdpasse })
+			return res.render('pages/index');
 		}else{
-			return res.status(500).json({ 'error': 'utilisateur deja existant'});
+			return res.status(500).json({ 'error': 'utilisateur déjà existant'});
 		}
+
 	},
-	login: function(req, res) {
-		var mail = req.body.user_mail
-		var mdp = req.body.user_mdp
-		if(mail ==null || mdp == null){
+	login: async function(req, res) {
+		var email = req.body.user_mail
+		var mdpasse = req.body.user_mdp
+		if(email ==null || mdpasse == null){
 			return res.status(400).json({ 'error': 'missing parameters' });
 		}
-		const user = utilisateur.find(utilisateur => utilisateur.mail === mail && utilisateur.mdp === mdp)
-		if( typeof user != 'undefined'){
-			return res.status(200).json({
-			'userID' : user.mail,
-			'token': jwt.genererToken(user)
-		})
+		const user = await db.collection('utilisateur').findOne({mail: email,mdp: mdpasse})
+		if(!(user === null)){
+			if(user.isAdmin == '1'){
+				IsLogin=2
+			}else{
+				IsLogin=1
+			}
+			return res.render('pages/index');
 		}else{
 			return res.status(600).json({ 'error': 'identifiants erronés'});
 		}
+	},
+	logout: async function(req,res){
+		IsLogin=0
+		return res.render('pages/index');
 	}
-}	
+}
+
+  

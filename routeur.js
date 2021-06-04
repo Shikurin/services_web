@@ -10,5 +10,6 @@ exports.routeur = (function(){
  rout.route('/').get(Rend.index);
  rout.route('/users/register/').post(Ctrl.register);
  rout.route('/users/login/').post(Ctrl.login);
+ rout.route('/users/logout/').get(Ctrl.logout);
  return rout
 })();
