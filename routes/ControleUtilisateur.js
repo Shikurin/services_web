@@ -26,7 +26,9 @@ module.exports = {
 		}
 		const user = await db.collection('utilisateur').findOne({mail: email,mdp: mdpasse})
 		if(!(user === null)){
-			if(user.isAdmin == '1'){
+			console.log(user)
+			console.log(user.isAdmin)
+			if(user.isAdmin === '1'){
 				IsLogin=2
 			}else{
 				IsLogin=1
