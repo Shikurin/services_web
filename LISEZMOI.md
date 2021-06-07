@@ -46,6 +46,7 @@ Vous accédez en ensuite à notre travail en tapant, dans l'URL de recherche de 
  	
  	
  
+
 ## Description des fonctionnalités
 
 Gardez non loin de vous la console : elle confirme toujours les actions que vous effectuez pendant la découverte de notre projet.
