@@ -15,8 +15,11 @@ Vous accédez en ensuite à notre travail en tapant, dans l'URL de recherche de 
 
 	http://localhost:8080/
 
+#### IMPORTANT ####
 	
+Pour acceder à une version fonctionnelle de notre projet, veuillez-utiliser la branche chatbot
 
+###################
 	
 ## Liste des packages importés
 
@@ -44,6 +47,9 @@ Vous accédez en ensuite à notre travail en tapant, dans l'URL de recherche de 
  
  	npm install discord.js
  	
+ - Installer mongoDB :
+	
+	npm install mongodb
  	
  
 
@@ -74,3 +80,7 @@ Gardez non loin de vous la console : elle confirme toujours les actions que vous
  - La page Parlons un peu est un peu particulière. Il s'agit de la deuxième façon de communiquer avec un chatbot, et n'est accessible que lorsque vous activez un bot, via la page de gestion des bots. Lorsque vous faites ceci, vous activez le port du bot sélectionné. Dans ce cas, direction votre navigateur préféré, entrez http://localhost:{id du bot + 3000}/ (jetez un oeil à la console) et vous accédez à la page mentionnée. Vous ne pouvez alors parler qu'à ce bot en particulier.
    
    Fichiers liés : server.js, chatServer.js, privateTalk.ejs
+
+## Fonctionnalités liées à l'inscription/ connexion : 
+
+-Suite à un problème avec la base MongoDB, le processus d'inscription et de connexion n'est plus disponible. Cependant, vous pouvez encore accéder à l'intégralité du code dans la branche login.
