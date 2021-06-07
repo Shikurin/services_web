@@ -3,15 +3,24 @@ const bodyParser = require('body-parser');
 var RiveScript = require("rivescript");
 
 var rout = require('./routeur').routeur;
+
 const MongoClient = require('mongodb').MongoClient;
+
+// Connection URL
 const url = 'mongodb+srv://ruben:Galindo95190@cluster0.jnuvf.mongodb.net/ChatBotServiceWeb?retryWrites=true&w=majority';
+
+// Database name
 const dbName = 'ChatBotServiceWeb';
-global.db
+const client = new MongoClient(url);
+//global.db
+
+// Connect method to connect to the server
 MongoClient.connect(url, function(err, client) {
   console.log("Connected successfully to server");
   db = client.db(dbName);
 });
 global.IsLogin = 0
+
 const ChatbotService = require("./chatBots/ChatbotService_ArrayImpl.js");
 
 let chatBotServiceInstance;
