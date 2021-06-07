@@ -2,32 +2,13 @@
   <a class="navbar-brand" href="/">EJS Is Fun</a>
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" href="/api/">Home</a>
+      <a class="nav-link" href="/">Gestion des amis</a>
     </li>
-    <% if (IsLogin == 0) { %>
-    <li class="nav-item">
-      <a class="nav-link" href="/api/users/login">Login</a>
-    </li>
-   <li class="nav-item">
-      <a class="nav-link" href="/api/users/register">Inscription</a>
-    </li>
-    <% } %>
-     <% if (IsLogin == 2) { %>
-	<li class="nav-item">
-      	<a class="nav-link" href="/">Gestion des amis</a>
-    	</li>
-	<li class="nav-item">
-      	<a class="nav-link" href="/personalities">Parlons personnalités</a>
-    	</li>
-    <% } %>
-    <% if (IsLogin != 0) { %>
     <li class="nav-item">
       <a class="nav-link" href="/talk">Envie de parler ?</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/api/users/logout">Logout</a>
+      <a class="nav-link" href="/personalities">Parlons personalités</a>
     </li>
-    <% } %>
-   
   </ul>
 </nav>

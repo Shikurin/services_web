@@ -2,16 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var RiveScript = require("rivescript");
 
-var rout = require('./routeur').routeur;
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://ruben:Galindo95190@cluster0.jnuvf.mongodb.net/ChatBotServiceWeb?retryWrites=true&w=majority';
-const dbName = 'ChatBotServiceWeb';
-global.db
-MongoClient.connect(url, function(err, client) {
-  console.log("Connected successfully to server");
-  db = client.db(dbName);
-});
-global.IsLogin = 0
 const ChatbotService = require("./chatBots/ChatbotService_ArrayImpl.js");
 
 let chatBotServiceInstance;
@@ -54,7 +44,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-app.use('/api/', rout);
 
 app.get('/', (req, res, next) => {
    //nothing to do
